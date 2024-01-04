@@ -4,8 +4,8 @@
 	import { Input } from '$lib/components/ui/input';
 	export let data:Meta;
 	console.log(data);
-	export let created_date = new Date(data.data.created_at);
-	console.log(created_date.toDateString);
+	let formattedDate = new Date(data.data.created_at).toDateString();
+
 
 </script>
 
@@ -21,7 +21,7 @@
 			</div>
 		</div>
 		<div class="flex flex-row">
-			<div class="container w-1/4">
+			<div class="container w-1/3">
 				<h2 class="m-4 font-bold">ID</h2>
 				<h2 class="m-4 font-bold">PURCHASED PRICE</h2>
 				<h2 class="m-4 font-bold">PROPERTY NAME</h2>
@@ -34,12 +34,12 @@
 			<div class="container">
 				<Input type="id" disabled value={data.data.id} class="max-w-xs" />
 				<Input type="full name" value={data.data.purchased_price} class="max-w-xs" />
-				<Input type="email" disabled value={data.data.property_table.title} class="max-w-xs" />
-				<Input type="phone number" disabled value={data.data.property_table.address} class="max-w-xs" />
+				<Input type="email" disabled value={data.data.property.title} class="max-w-xs" />
+				<Input type="phone number" disabled value={data.data.property.address} class="max-w-xs" />
 				<Input type="city" disabled value={data.data.profiles.full_name} class="max-w-xs" />
 				<Input type="city" disabled value={data.data.profiles.email} class="max-w-xs" />
 				<Input type="city" disabled value={data.data.profiles.phone} class="max-w-xs" />
-				<h3 class="m-4 max-w-xs font-bold">{created_date}</h3>
+				<h3 class="m-4 max-w-xs font-bold">{formattedDate}</h3>
 			</div>
 		</div>
 	</div>

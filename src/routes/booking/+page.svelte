@@ -40,7 +40,7 @@
 			cell: (info) => info.getValue()
 		},
 		{
-			accessorKey: 'property_table.title',
+			accessorKey: 'property.title',
 			header: 'title',
 			cell: (info) => info.getValue()
 		},

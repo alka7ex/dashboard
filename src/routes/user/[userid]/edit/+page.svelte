@@ -4,7 +4,8 @@
 	import { Input } from '$lib/components/ui/input';
 	export let data;
 	console.log(data);
-	export let created_date = new Date(data.data.created_at,);
+	let { id, full_name, email, phone, city, created_at } = data.data;
+	export let created_date = new Date(created_at,);
 	console.log(created_date.toDateString);
 
 </script>
@@ -17,11 +18,11 @@
 			</div>
 			<div class="ml-auto items-end">
 				<Button >Save</Button>
-				<Button href="/user/{data.data.id}">Cancel</Button>
+				<Button href="/user/{id}">Cancel</Button>
 			</div>
 		</div>
 		<div class="flex flex-row">
-			<div class="container w-1/4">
+			<div class="container w-1/3">
 				<h2 class="m-4 font-bold">ID</h2>
 				<h2 class="m-4 font-bold">FULL NAME</h2>
 				<h2 class="m-4 font-bold">EMAIL</h2>
@@ -30,11 +31,11 @@
 				<h2 class="m-4 font-bold">CREATED DATE</h2>
 			</div>
 			<div class="container">
-				<Input type="id" disabled value={data.data.id} class="max-w-xs" />
-				<Input type="full name" value={data.data.full_name} class="max-w-xs" />
-				<Input type="email" disabled value={data.data.email} class="max-w-xs" />
-				<Input type="phone number" disabled value={data.data.phone} class="max-w-xs" />
-				<Input type="city" disabled value={data.data.city} class="max-w-xs" />
+				<Input type="id" disabled value={id} class="max-w-xs" />
+				<Input type="full name" value={full_name} class="max-w-xs" />
+				<Input type="email" disabled value={email} class="max-w-xs" />
+				<Input type="phone number" disabled value={phone} class="max-w-xs" />
+				<Input type="city" disabled value={city} class="max-w-xs" />
 				<h3 class="m-4 max-w-xs font-bold">{created_date}</h3>
 			</div>
 		</div>

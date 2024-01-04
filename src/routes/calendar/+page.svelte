@@ -5,14 +5,15 @@
     import DayGrid from '@event-calendar/day-grid';
 
 
-    let plugins = [TimeGrid];
+    let plugins = [DayGrid];
     let options = {
-        view: 'timeGridWeek',
+        view: 'dayGridMonth',
         events: [
             // your list of events
         ]
     };
     export let data: PageData;
 </script>
-
-<Calendar {plugins} {options} />
+<div class="container p-4">
+    <Calendar {plugins} {options} />
+</div>

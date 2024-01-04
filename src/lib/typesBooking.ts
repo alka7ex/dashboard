@@ -1,8 +1,8 @@
 export interface Meta {
-  error:      null;
+  error:      string;
   data:       Data;
-  count:      null;
-  status:     number;
+  count:      string;
+  status:     string;
   statusText: string;
 }
 
@@ -11,7 +11,7 @@ export interface Data {
   purchased_price: number;
   created_at:      Date;
   profiles:        Profiles;
-  property_table:  PropertyTable;
+  property:  PropertyTable;
 }
 
 export interface Profiles {
@@ -19,14 +19,14 @@ export interface Profiles {
   full_name: string;
   phone:     string;
   email:     string;
-  city:      null;
+  city:      string;
 }
 
 export interface PropertyTable {
   property_id: string;
   title:       string;
   address:     string;
-  zip_code:    null;
-  state:       null;
-  country:     null;
+  zip_code:    string;
+  state:       string;
+  country:     string;
 }

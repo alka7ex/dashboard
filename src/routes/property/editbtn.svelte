@@ -9,7 +9,7 @@
 
     function handleEdit() {
         // Navigate to the edit page for the specific profile
-        goto(`/user/${profile.id}`);
+        goto(`/property/${profile.id}`);
     }
 </script>
 
