@@ -46,6 +46,7 @@
 	},
 	"type": "module",
 	"dependencies": {
+		"@supabase/ssr": "^0.0.10",
 		"@supabase/supabase-js": "^2.39.1",
 		"@tanstack/svelte-table": "^8.11.2",
 		"bits-ui": "^0.13.0",
