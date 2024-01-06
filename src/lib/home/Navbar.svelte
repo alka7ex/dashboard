@@ -1,7 +1,11 @@
 <script>
-	import { User } from 'lucide-svelte';
 	import { page } from '$app/stores';
 	import Button from '$lib/components/ui/button/button.svelte';
+	import { goto } from '$app/navigation';
+
+	export let data;
+	$: ({ session, supabase } = data);
+
 	let nav = {
 		title: 'Svelte Tailwinds',
 		img: 'https://cdn-icons-png.flaticon.com/512/5769/5769490.png',
@@ -14,20 +18,21 @@
 				name: 'Property',
 				link: '/property'
 			},
-            {
+			{
 				name: 'Booking',
 				link: '/booking'
 			},
-            {
+			{
 				name: 'Calendar',
 				link: '/calendar'
 			},
-            {
+			{
 				name: 'User',
 				link: '/user'
-			},
+			}
 		]
 	};
+	$: isActive = $page.route.id?.split('/')[1];
 
 	let profileNavs = [
 		{
@@ -43,16 +48,14 @@
 			link: '/'
 		}
 	];
-	$: isActive = $page.route.id?.split('/')[1];
 
 	let isProfileMenu = false;
 	let isMobileMenu = false;
 
 	//  Checking via email is user logged in
-	export let email = '';
 </script>
 
-<nav class="bg-white shadow border-b border-slate-300">
+<nav class="border-b border-slate-300 bg-white shadow">
 	<div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
 		<div class="flex h-16 justify-between">
 			<div class="flex">
@@ -64,7 +67,7 @@
 						aria-controls="mobile-menu"
 						aria-expanded="false"
 						on:click={() => (isMobileMenu = !isMobileMenu)}
-                        data-sveltekit-preload-data = "hover"
+						data-sveltekit-preload-data="hover"
 					>
 						<span class="absolute -inset-0.5" />
 						<span class="sr-only">Open main menu</span>
@@ -108,33 +111,23 @@
 					<img class="h-8 w-auto" src={nav.img} alt="Your Company" />
 				</div>
 				<div class="hidden md:ml-6 md:flex md:space-x-8">
-					{#each nav.listnavs as item}
-						<a
-							href={item.link}
-							class="{isActive === item.link.split('/')[1]
-								? 'border-indigo-500 text-gray-900'
-								: 'border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700'} inline-flex items-center border-b-2 px-1 pt-1 text-sm font-medium"
-							>{item.name}</a
-						>
-					{/each}
+					{#if session != null}
+						{#each nav.listnavs as item}
+							<Button
+								href={item.link} class="my-auto" variant="link"
+								>{item.name}</Button>
+						{/each}
+					{/if}
 				</div>
 			</div>
 			<div class="flex items-center">
 				<div class="flex-shrink-0">
-					{#if email.length > 0}
-						<!-- if user is logged in -->
-						<form method="POST">
-							<Button formaction="/?/logout">
-								<User size="18" class="mr-1" strokeWidth="2" />
-								Log Out</Button
-							>
-						</form>
+					{#if session != null}
+						<Button on:click={() => supabase.auth.signOut()}>Sign out</Button>
 					{:else}
-						<!-- if user is not logged in -->
 						<Button href="/login">
-							<User size="18" class="mr-1" strokeWidth="2" />
-							Log In</Button
-						>
+							Log In
+						</Button>
 					{/if}
 				</div>
 			</div>
@@ -148,8 +141,8 @@
 				<a
 					href={item.link}
 					class="{isActive === item.link.split('/')[1]
-						? 'bg-indigo-50 border-indigo-500 text-indigo-700'
-						: 'border-transparent text-gray-500 hover:bg-gray-50 hover:border-gray-300 hover:text-gray-700'} block border-l-4 py-2 pl-3 pr-4 text-base font-medium sm:pl-5 sm:pr-6"
+						? 'border-indigo-500 bg-indigo-50 text-indigo-700'
+						: 'border-transparent text-gray-500 hover:border-gray-300 hover:bg-gray-50 hover:text-gray-700'} block border-l-4 py-2 pl-3 pr-4 text-base font-medium sm:pl-5 sm:pr-6"
 					>{item.name}</a
 				>
 			{/each}
