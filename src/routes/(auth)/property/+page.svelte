@@ -18,7 +18,7 @@
 		pagination: { total: number; pageSize: number; pageNumber: number };
 	};
 	const { data: profiles, pagination } = data;
-	console.log(data);
+	// console.log(data);
 	const defaultColumns: ColumnDef<Property>[] = [
 		{
 			accessorKey: 'id',

@@ -1,9 +1,12 @@
 import { PUBLIC_SUPABASE_URL, PUBLIC_SUPABASE_ANON_KEY } from '$env/static/public';
 import { createServerClient } from '@supabase/ssr';
-import type { Handle } from '@sveltejs/kit';
+import { redirect, type Handle } from '@sveltejs/kit';
 import { sequence } from '@sveltejs/kit/hooks';
 
 const createSupabaseClient: Handle = async ({ event, resolve }) => {
+	if (event.route.id?.startsWith('/(auth)')) {
+			throw redirect(302, '/login');
+	}
 	event.locals.supabase = createServerClient(PUBLIC_SUPABASE_URL, PUBLIC_SUPABASE_ANON_KEY, {
 		cookies: {
 			get: (key) => event.cookies.get(key),
@@ -17,6 +20,8 @@ const createSupabaseClient: Handle = async ({ event, resolve }) => {
 			}
 		}
 	});
+
+
 
 	/**
 	 * a little helper that is written for convenience so that instead
@@ -36,6 +41,7 @@ const createSupabaseClient: Handle = async ({ event, resolve }) => {
 			return name === 'content-range';
 		}
 	});
+
 };
 
 export const handle = sequence(createSupabaseClient);

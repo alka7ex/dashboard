@@ -1,15 +1,5 @@
-import { Auth } from '@supabase/auth-ui-svelte';
 import { AuthApiError } from '@supabase/supabase-js';
 import { redirect, type Actions, fail } from '@sveltejs/kit';
-
-
-// export const load = (async (event) => {
-//     const session = await event.locals.getSession();
-//     if(session) {
-//         throw redirect(302, '/');
-//     }
-//     return {};
-// });
 
 export const actions: Actions = {
     login: async ({ request, locals }) => {

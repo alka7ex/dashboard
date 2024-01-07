@@ -7,6 +7,7 @@
 	import { derived, writable } from 'svelte/store';
 
 	export let data;
+	// console.log(data)
 
 	$: ({ supabase, session } = data);
 
